@@ -1,4 +1,3 @@
-import textwrap
 import PyPDF2
 
 
@@ -10,15 +9,19 @@ def get_text(pdf_reader, num_pages):
         pdf_text.append(extracted_text)
     return "".join(pdf_text)
 
-def get_text_chunks(text):
-    chunk_size = 2000
-    overlap_size = 100
-    chunks = textwrap.wrap(text, width=chunk_size, step=chunk_size-overlap_size)
-    chunk_arr = []
-    for chunk in chunks:
-        chunk_arr.append(chunk)
-    return chunk_arr
 
+def text_to_segments(text):
+    segment_size = 2000
+    overlap_size = 100
+    segments = []
+    start = 0
+    end = segment_size
+    while start < len(text):
+        segment = text[start:end]
+        segments.append(segment)
+        start = end - overlap_size
+        end = start + segment_size
+    return segments
 
 
 class PDF:
@@ -28,4 +31,4 @@ class PDF:
         self.num_pages = len(self.reader.pages)
         self.name = uploaded_file.name
         self.text = get_text(self.reader, self.num_pages)
-        self.chunk_arr = get_text_chunks(self.text)
+        self.text_segments = text_to_segments(self.text)

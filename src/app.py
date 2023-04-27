@@ -1,4 +1,6 @@
 import streamlit as st
+import os
+from key import OPEN_API_KEY
 
 from pdf import PDF
 
@@ -23,4 +25,5 @@ def main():
             st.success("PDF file uploaded successfully.")
     
 if __name__ == "__main__":
+    os.environ["OPENAI_API_KEY"] = OPEN_API_KEY
     main()

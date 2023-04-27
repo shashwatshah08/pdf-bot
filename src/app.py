@@ -1,17 +1,12 @@
 import streamlit as st
-import PyPDF2
+
+from pdf import PDF
 
 # Define function to process uploaded PDF file
 def process_pdf_file(uploaded_file):
-    
-    # Read PDF file
-    pdf_reader = PyPDF2.PdfReader(uploaded_file)
-    num_pages = len(pdf_reader.pages)
-    st.success(f"Uploaded file '{uploaded_file.name}' contains {num_pages} pages.")
-    
-    # Save PDF file to variable
+    pdf = PDF(uploaded_file)
+    st.success(f"Uploaded file '{pdf.name}' contains {pdf.num_pages} pages.")
     pdf_data = uploaded_file.getvalue()
-    
     return pdf_data
 
 # Create Streamlit web application

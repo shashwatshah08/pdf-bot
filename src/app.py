@@ -34,3 +34,5 @@ if __name__ == "__main__":
         pdf = PDF(uploaded_file)
         storage = Storage(pdf.text_segments)
         st.write(storage.df)
+        user_input = st.text_input()
+        print(user_input)

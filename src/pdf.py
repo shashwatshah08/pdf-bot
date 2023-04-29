@@ -11,7 +11,7 @@ def get_text(pdf_reader, num_pages):
 
 
 def text_to_segments(text):
-    segment_size = 2000
+    segment_size = 5000
     overlap_size = 100
     segments = []
     start = 0
